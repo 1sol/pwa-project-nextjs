@@ -1,0 +1,198 @@
+.hospital {
+  &__top {
+    position: fixed;
+    top: 0;
+    width: 28rem;
+    padding: 1rem 1.2rem;
+    background: #fff;
+    z-index: 100;
+  }
+
+  &__title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    span {
+      width: 100%;
+      text-align: center;
+      font-weight: 600;
+      font-size: 17px;
+    }
+
+    .btn__back {
+      height: 20px;
+    }
+  }
+
+  &__contents {
+    margin-top: 70px;
+  }
+
+  &__search {
+    &__wrap {
+      padding: 0 1.2rem;
+
+      .hospital__search__filter {
+        .filter_item > div {
+          border-radius: 32px;
+        }
+      }
+    }
+
+    &__input {
+      .icon_location {
+        color: #00000073;
+      }
+    }
+
+    &__filter {
+      margin-top: 10px;
+
+      .filter_item {
+        margin-right: 5px;
+      }
+
+      button {
+        margin-right: 5px;
+      }
+    }
+  }
+
+  &__list {
+    margin-top: 30px;
+
+    &__item {
+      padding: 20px 1.2rem;
+
+      &__wrap {
+        border-top: 1px solid #eee;
+      }
+
+      &_title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h2 {
+          margin: 0;
+          font-size: 18px;
+          font-weight: 600;
+        }
+      }
+
+      &_buttons {
+        z-index: 10;
+
+        ul {
+          display: flex;
+          margin: 0;
+          li {
+            margin-right: 12px;
+
+            &:last-child {
+              margin: 0;
+            }
+          }
+        }
+      }
+
+      &_contents {
+        p {
+          margin-bottom: 0;
+        }
+
+        .info {
+          margin-top: 5px;
+          font-size: 15px;
+
+          span {
+            margin-right: 5px;
+            font-weight: 600;
+          }
+        }
+
+        .description {
+          font-size: 14px;
+          line-height: 1.3;
+
+          span {
+            &::before {
+              content: "★";
+              display: inline-block;
+              width: 17px;
+              height: 18px;
+            }
+
+            &::after {
+              content: "";
+              display: inline-block;
+              vertical-align: middle;
+              width: 1px;
+              height: 12px;
+              margin: 0 10px;
+              background: #999;
+            }
+          }
+        }
+
+        .tag {
+          margin-top: 15px;
+
+          span {
+            padding: 5px;
+            margin-right: 5px;
+            border-radius: 5px;
+            background: #e3e3e3;
+            font-size: 14px;
+            color: #6e6e6e;
+          }
+        }
+
+        .address {
+          margin: 10px 0;
+          span {
+            display: block;
+            font-size: 14px;
+            color: #858585;
+            line-height: 1.5;
+          }
+        }
+
+        .time {
+          display: flex;
+
+          h4 {
+            margin-right: 30px;
+            font-size: 14px;
+            color: #858585;
+          }
+
+          span {
+            display: block;
+            line-height: 1.5;
+            font-size: 14px;
+            color: #3a3939;
+          }
+        }
+      }
+    }
+
+    &__doctor {
+      margin: 30px 0 20px 0;
+      padding: 15px 0;
+      border-top: 1px solid #eee;
+
+      h4 {
+        font-size: 16px;
+        margin-bottom: 5px;
+      }
+
+      p {
+        line-height: 1.5;
+        font-size: 14px;
+        color: #858585;
+      }
+    }
+  }
+}
