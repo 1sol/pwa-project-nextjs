@@ -1,4 +1,3 @@
-import { useCallback, useRef, useState } from 'react';
 import Image from 'next/image';
 import Webcam from 'react-webcam';
 import styled from 'styled-components';
@@ -9,24 +8,25 @@ const CameraButton = styled.div``;
 
 const Photo = styled.div``;
 
-const WebCam = () => {
-	const webcamRef = useRef(null);
-	const [image, setImage] = useState('');
-
-	const handleTakePhoto = useCallback(() => {
-		const imgSrc = webcamRef.current.getScreenshot();
-		setImage(imgSrc);
-	}, [webcamRef]);
-
+const WebCam = ({
+	handleTakePhoto,
+	camRef,
+	photo,
+	cameraWidth,
+	cameraHeight,
+	cameraFormat,
+	alt,
+	photoWidth,
+	photoHeight,
+}) => {
 	return (
 		<>
 			<Camera>
-				<Webcam audio={false} ref={webcamRef} width={200} height={200} screenshotFormat='image/jpeg' />
+				<Webcam audio={false} ref={camRef} width={cameraWidth} height={cameraHeight} screenshotFormat={cameraFormat} />
 			</Camera>
 			<CameraButton>
 				<button
-					onClick={(e) => {
-						e.preventDefault();
+					onClick={() => {
 						handleTakePhoto();
 					}}
 				>
@@ -34,7 +34,7 @@ const WebCam = () => {
 				</button>
 			</CameraButton>
 
-			<Photo>{image && <Image src={image} alt='' width={200} height={200} />}</Photo>
+			<Photo>{photo && <Image src={photo} alt={alt} width={photoWidth} height={photoHeight} />}</Photo>
 		</>
 	);
 };
