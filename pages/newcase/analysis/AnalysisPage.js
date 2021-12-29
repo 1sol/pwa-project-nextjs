@@ -1,6 +1,4 @@
-import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import Image from 'next/image';
 import styled from 'styled-components';
 import { Steps } from 'antd';
 import Layout from '@components/container';

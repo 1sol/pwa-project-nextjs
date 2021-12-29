@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import styled from 'styled-components';
-import Layout from '@components/container';
+import { Layout } from '@components/container';
 
 const Analysis = styled.div`
 	padding: ${({ theme }) => theme.paddings.xxxl};

@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import shortid from 'shortid';
 import { Button, Input } from 'antd';
-import Layout from '@components/container';
+import { Layout } from '@components/container';
 import { skinItem } from './config';
 import styled from 'styled-components';
 

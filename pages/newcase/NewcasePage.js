@@ -2,7 +2,7 @@ import { useCallback, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import styled from 'styled-components';
-import Layout from '@components/container';
+import { FileAttacher, Layout } from '@components/container';
 import { WebCam } from '@components/presentational';
 
 const NewCase = styled.div`
@@ -23,7 +23,14 @@ const SaveButton = styled.div`
 	}
 `;
 
-const NewcasePage = () => {
+const AlbumButton = styled.div`
+	position: absolute;
+	bottom: 55px;
+	left: 15px;
+	z-index: 10;
+`;
+
+const NewcasePage = ({ imgUrl }) => {
 	const router = useRouter();
 	const camRef = useRef(null);
 	const [photo, setPhoto] = useState('');
@@ -32,7 +39,6 @@ const NewcasePage = () => {
 		const imgSrc = camRef.current.getScreenshot();
 		setPhoto(imgSrc);
 	}, [camRef]);
-
 	const handleSavePhoto = async (e) => {
 		e.preventDefault();
 
@@ -59,6 +65,9 @@ const NewcasePage = () => {
 	return (
 		<Layout isHeaderVisible={false} isFooterVisible={false}>
 			<NewCase>
+				<AlbumButton>
+					<FileAttacher />
+				</AlbumButton>
 				<WebCam
 					camRef={camRef}
 					handleTakePhoto={handleTakePhoto}

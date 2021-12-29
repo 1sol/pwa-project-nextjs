@@ -1,3 +1,4 @@
-import Layout from "./Layout";
+import Layout from './Layout';
+import FileAttacher from './FileAttacher';
 
-export default Layout;
+export { Layout, FileAttacher };
