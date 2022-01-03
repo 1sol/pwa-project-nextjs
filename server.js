@@ -13,7 +13,7 @@ const handle = app.getRequestHandler();
 
 const ports = {
 	http: 3080,
-	https: 3002,
+	https: 3001,
 };
 
 const httpsOptions = {

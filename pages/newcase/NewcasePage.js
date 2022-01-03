@@ -11,34 +11,83 @@ const NewCase = styled.div`
 	overflow: hidden;
 `;
 
-const SaveButton = styled.div`
-	position: absolute;
-	bottom: 55px;
-	right: 15px;
+const CameraButtonWrap = styled.div`
+	position: fixed;
+	bottom: 10px;
 	z-index: 10;
+	width: 28rem;
+	padding: 0 15px;
+	${({ theme }) => theme.common.flex};
+	${({ theme }) => theme.common.flexRow};
+	${({ theme }) => theme.common.flexVerticalCenter};
+	${({ theme }) => theme.common.flexSpaceBetween};
+`;
 
+const SaveButton = styled.div`
 	a {
 		font-size: ${({ theme }) => theme.fontSizes.lg};
 		cursor: pointer;
 	}
 `;
 
-const AlbumButton = styled.div`
-	position: absolute;
-	bottom: 55px;
-	left: 15px;
-	z-index: 10;
+const CameraButton = styled.div`
+	position: fixed;
+	left: 50%;
+	transform: translate(-50%, 0);
+
+	&:after {
+		content: '';
+		display: inline-block;
+		width: 65px;
+		height: 65px;
+		border-radius: 50%;
+		border: 1px solid ${({ theme }) => theme.colors.black};
+		border-radius: 50%;
+		z-index: 1;
+	}
+
+	button {
+		position: absolute;
+		top: 5px;
+		left: 5px;
+		width: 55px;
+		height: 55px;
+		background-color: ${({ theme }) => theme.colors.black};
+		border-radius: 50%;
+	}
 `;
 
-const NewcasePage = ({ imgUrl }) => {
+const AlbumButton = styled.div`
+	.ant-upload.ant-upload-select-picture-card {
+		width: 50px;
+		height: 50px;
+		border: 0;
+	}
+
+	.ant-upload-list-picture-card-container {
+		width: 50px;
+		height: 50px;
+	}
+	.ant-upload-list-picture-card .ant-upload-list-item {
+		padding: 0;
+	}
+`;
+
+const NewcasePage = () => {
 	const router = useRouter();
 	const camRef = useRef(null);
 	const [photo, setPhoto] = useState('');
+	const [fileList, setFileList] = useState([]);
+
+	const handleChangeFile = ({ fileList: newFileList }) => {
+		setFileList(newFileList);
+	};
 
 	const handleTakePhoto = useCallback(() => {
 		const imgSrc = camRef.current.getScreenshot();
 		setPhoto(imgSrc);
 	}, [camRef]);
+
 	const handleSavePhoto = async (e) => {
 		e.preventDefault();
 
@@ -65,9 +114,6 @@ const NewcasePage = ({ imgUrl }) => {
 	return (
 		<Layout isHeaderVisible={false} isFooterVisible={false}>
 			<NewCase>
-				<AlbumButton>
-					<FileAttacher />
-				</AlbumButton>
 				<WebCam
 					camRef={camRef}
 					handleTakePhoto={handleTakePhoto}
@@ -79,10 +125,21 @@ const NewcasePage = ({ imgUrl }) => {
 					photoWidth='50px'
 					photoHeight='50px'
 				/>
-
-				<SaveButton>
-					<a onClick={handleSavePhoto}>저장</a>
-				</SaveButton>
+				<CameraButtonWrap>
+					<AlbumButton>
+						<FileAttacher fileList={fileList} onChange={handleChangeFile} maxCount={1} />
+					</AlbumButton>
+					<CameraButton>
+						<button
+							onClick={() => {
+								handleTakePhoto();
+							}}
+						/>
+					</CameraButton>
+					<SaveButton>
+						<a onClick={handleSavePhoto}>저장</a>
+					</SaveButton>
+				</CameraButtonWrap>
 			</NewCase>
 		</Layout>
 	);

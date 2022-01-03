@@ -1,16 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Upload } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import ImgCrop from 'antd-img-crop';
-import 'antd/es/modal/style';
+import 'antd/lib/modal/style';
+import 'antd/lib/slider/style';
 
-const FileAttacher = () => {
-	const [fileList, setFileList] = useState([]);
-
-	const onChange = ({ fileList: newFileList }) => {
-		setFileList(newFileList);
-	};
-
+const FileAttacher = ({ fileList, onChange, maxCount }) => {
 	const onPreview = async (file) => {
 		let src = file.url;
 		if (!src) {
@@ -28,8 +23,8 @@ const FileAttacher = () => {
 
 	return (
 		<ImgCrop rotate>
-			<Upload listType='picture-card' fileList={fileList} onChange={onChange} onPreview={onPreview}>
-				{fileList.length < 5 && <UploadOutlined />}
+			<Upload listType='picture-card' maxCount={maxCount} fileList={fileList} onChange={onChange} onPreview={onPreview}>
+				<UploadOutlined />
 			</Upload>
 		</ImgCrop>
 	);

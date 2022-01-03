@@ -19,8 +19,6 @@ const CameraPhoto = () => {
 				muted
 			/>
 			{image && <Image src={image} alt='' width={200} height={200} />}
-
-			<input type='file' placeholder='file attacher' accept='.png, .jpg' />
 		</>
 	);
 };
