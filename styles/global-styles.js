@@ -15,6 +15,10 @@ export const GlobalStyle = createGlobalStyle`
         font: 1.2em/1.3em "NanumSquare", sans-serif !important;
         overflow-x: hidden;
       }
+
+      main {
+        height: 100%;
+      }
       
       p,
       span,

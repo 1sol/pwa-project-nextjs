@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import shortid from 'shortid';
-import Layout from '@components/container';
+import { Layout } from '@components/container';
 import styles from '../StoryPage.module.scss';
 import { storySkinInfo } from '../config';
 

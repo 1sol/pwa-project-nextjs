@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { withRouter } from 'next/router';
 import styled from 'styled-components';
 import { Layout } from '@components/container';
 
@@ -8,7 +9,7 @@ const Analysis = styled.div`
 	margin-top: 10rem;
 `;
 
-const AnalysisState = styled.div``;
+const AnalysisResult = styled.div``;
 
 const ResultText = styled.div`
 	p {
@@ -17,7 +18,7 @@ const ResultText = styled.div`
 	}
 `;
 
-const AnalysisStatePage = () => {
+const AnalysisResultPage = () => {
 	const [dataUrl, setDataUrl] = useState('');
 
 	useEffect(() => {
@@ -29,7 +30,7 @@ const AnalysisStatePage = () => {
 		<Layout isHeaderVisible={false} isFooterVisible={false}>
 			<Analysis>
 				{dataUrl && (
-					<AnalysisState>
+					<AnalysisResult>
 						<Image src={dataUrl} alt='' width='100%' height='100%' />
 						<ResultText>
 							<h3>분석 완료 되었습니다.</h3>
@@ -38,11 +39,11 @@ const AnalysisStatePage = () => {
 							</p>
 							<p>자세한 내용은 병원을 내원해주세요.</p>
 						</ResultText>
-					</AnalysisState>
+					</AnalysisResult>
 				)}
 			</Analysis>
 		</Layout>
 	);
 };
 
-export default AnalysisStatePage;
+export default withRouter(AnalysisResultPage);

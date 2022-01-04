@@ -1,8 +1,8 @@
 import { useCallback, useRef, useState } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter, withRouter } from 'next/router';
 import axios from 'axios';
 import styled from 'styled-components';
-import { FileAttacher, Layout } from '@components/container';
+import { FileAttacher } from '@components/container';
 import { WebCam } from '@components/presentational';
 
 const NewCase = styled.div`
@@ -13,9 +13,10 @@ const NewCase = styled.div`
 
 const CameraButtonWrap = styled.div`
 	position: fixed;
+	width: 100%;
 	bottom: 10px;
+	margin: 0 auto;
 	z-index: 10;
-	width: 28rem;
 	padding: 0 15px;
 	${({ theme }) => theme.common.flex};
 	${({ theme }) => theme.common.flexRow};
@@ -24,10 +25,7 @@ const CameraButtonWrap = styled.div`
 `;
 
 const SaveButton = styled.div`
-	a {
-		font-size: ${({ theme }) => theme.fontSizes.lg};
-		cursor: pointer;
-	}
+	right: 15px;
 `;
 
 const CameraButton = styled.div`
@@ -95,7 +93,7 @@ const NewcasePage = () => {
 			const data = await axios({
 				method: 'POST',
 				url: '/api/hello',
-				data: photo,
+				data: photo ? photo : fileList[0].thumbUrl || null,
 				headers: {
 					'Content-Type': 'image/jpeg',
 				},
@@ -112,37 +110,35 @@ const NewcasePage = () => {
 	};
 
 	return (
-		<Layout isHeaderVisible={false} isFooterVisible={false}>
-			<NewCase>
-				<WebCam
-					camRef={camRef}
-					handleTakePhoto={handleTakePhoto}
-					photo={photo}
-					width='auto'
-					height='100%'
-					cameraFormat='image/jpeg'
-					alt=''
-					photoWidth='50px'
-					photoHeight='50px'
-				/>
-				<CameraButtonWrap>
-					<AlbumButton>
-						<FileAttacher fileList={fileList} onChange={handleChangeFile} maxCount={1} />
-					</AlbumButton>
-					<CameraButton>
-						<button
-							onClick={() => {
-								handleTakePhoto();
-							}}
-						/>
-					</CameraButton>
-					<SaveButton>
-						<a onClick={handleSavePhoto}>저장</a>
-					</SaveButton>
-				</CameraButtonWrap>
-			</NewCase>
-		</Layout>
+		<NewCase>
+			<WebCam
+				camRef={camRef}
+				handleTakePhoto={handleTakePhoto}
+				photo={photo}
+				width={() => window.innerWidth}
+				height={() => window.innerHeight}
+				cameraFormat='image/jpeg'
+				alt=''
+				photoWidth='50px'
+				photoHeight='50px'
+			/>
+			<CameraButtonWrap>
+				<AlbumButton>
+					<FileAttacher fileList={fileList} onChange={handleChangeFile} maxCount={1} />
+				</AlbumButton>
+				<CameraButton>
+					<button
+						onClick={() => {
+							handleTakePhoto();
+						}}
+					/>
+				</CameraButton>
+				<SaveButton>
+					<a onClick={handleSavePhoto}>저장</a>
+				</SaveButton>
+			</CameraButtonWrap>
+		</NewCase>
 	);
 };
 
-export default NewcasePage;
+export default withRouter(NewcasePage);

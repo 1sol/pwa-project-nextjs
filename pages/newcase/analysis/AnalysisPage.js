@@ -1,7 +1,7 @@
-import { useRouter } from 'next/router';
+import { useRouter, withRouter } from 'next/router';
 import styled from 'styled-components';
 import { Steps } from 'antd';
-import Layout from '@components/container';
+import { Layout } from '@components/container';
 
 const Analysis = styled.div`
 	padding: ${({ theme }) => theme.paddings.xxxl};
@@ -23,7 +23,7 @@ const AnalysisPage = () => {
 	const router = useRouter();
 
 	const handleMoveCompletePage = () => {
-		router.push('/newcase/analysis/state');
+		router.push('/newcase/analysis/result');
 	};
 
 	return (
@@ -41,4 +41,4 @@ const AnalysisPage = () => {
 	);
 };
 
-export default AnalysisPage;
+export default withRouter(AnalysisPage);

@@ -7,7 +7,7 @@ import 'antd/lib/slider/style';
 
 const FileAttacher = ({ fileList, onChange, maxCount }) => {
 	const onPreview = async (file) => {
-		let src = file.url;
+		console.log('file', file);
 		if (!src) {
 			src = await new Promise((resolve) => {
 				const reader = new FileReader();

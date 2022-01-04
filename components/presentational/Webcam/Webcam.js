@@ -33,6 +33,7 @@ const WebCam = ({ camRef, photo, width, height, cameraFormat, alt, photoWidth, p
 					className='webcam'
 					forceScreenshotSourceSize='true'
 					videoConstraints={videoConstraints}
+					style={{ transform: 'scaleX(-1)' }}
 				/>
 			</Camera>
 
